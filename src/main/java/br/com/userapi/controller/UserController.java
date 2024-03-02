@@ -29,7 +29,7 @@ public class UserController {
             return ResponseEntity.ok(user);
         }
         else {
-            return (ResponseEntity) ResponseEntity.notFound();
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -37,7 +37,7 @@ public class UserController {
     public ResponseEntity updatePassword(@PathVariable String id, @RequestBody String password) {
         User user = repository.findById(id).orElse(null);
         if(user == null) {
-            return (ResponseEntity) ResponseEntity.notFound();
+            return ResponseEntity.notFound().build();
         }
         user.setPassword(password);
         repository.save(user);
@@ -48,7 +48,7 @@ public class UserController {
     public ResponseEntity deleteUser(@PathVariable String id) {
         User user = repository.findById(id).orElse(null);
         if(user == null) {
-            return (ResponseEntity) ResponseEntity.notFound();
+            return ResponseEntity.notFound().build();
         }
         repository.delete(user);
         return ResponseEntity.ok("Usuário removido.");
